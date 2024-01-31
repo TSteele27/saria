@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "saria"
+version = "0.1.0"
+description = ""
+authors = ["Tyler Steele <tsteele627@gmail.com>"]
+readme = "README.md"
+packages = [{include = "saria"},{include = "demo_app"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.109.0"
+python-dotenv = "^1.0.1"
+omegaconf = "^2.3.0"
+uvicorn = "^0.27.0"
+gunicorn = "^21.2.0"
+pyee = "^11.1.0"
+boto3 = "^1.34.29"
+bson = "^0.5.10"
+
+
+[tool.poetry.group.dev.dependencies]
+watchfiles = "^0.21.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.scripts]
+demo-server = "demo_app.server.main:app --reload"
+consumer = "watchfiles demo_app.consumer.main:run"
