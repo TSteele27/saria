@@ -5,4 +5,5 @@ class MessageHandlers(Module):
     def __init__(self):
         self.handlers = []
 
-    def register(handler:'MessageHandler'):
+    def register(self, handler: "MessageHandler"):
+        self.handlers.append(handler)

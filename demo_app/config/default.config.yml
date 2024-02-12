@@ -1,5 +1,8 @@
 app: 
   name: "pets"
+mongo:
+  host: "mongodb://host.docker.internal:27017"
+  database: "pets"
 consumer:
   queue_name: "pets_queue"
 producer:

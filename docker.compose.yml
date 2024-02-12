@@ -28,11 +28,11 @@ services:
       - ./demo_app:/app/demo_app
       - ./saria:/app/saria
     working_dir: /app/demo_app
-    command: poetry run uvicorn server.main:app --host 0.0.0.0 --reload
+    command: poetry run uvicorn server.main:app --host 0.0.0.0 --reload --reload-dir=/app/demo_app --reload-dir=/app/saria
   consumer:
     build: .
     volumes:
       - ./demo_app:/app/demo_app
       - ./saria:/app/saria
     working_dir: /app/demo_app
-    command: poetry run watchfiles demo_app.consumer.main.run
+    command: poetry run watchgod demo_app.consumer.main.run

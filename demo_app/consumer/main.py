@@ -5,5 +5,10 @@ from saria.messaging.consumer import bundle as consumer_bundle
 
 
 def run():
+    print("Starting consumer...")
     app = Bundle().extend(**consumer_bundle).bootstrap()
     app.manifest.consumer.start()
+
+
+if __name__ == "__main__":
+    run()

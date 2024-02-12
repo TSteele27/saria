@@ -10,7 +10,7 @@ class ObjectId(str):
     """ObjectId class for pydantic models."""
 
     @classmethod
-    def validate(cls, value):
+    def validate(cls, value, info):
         """Validate given str value to check if good for being ObjectId."""
         try:
             return BaseObjectId(str(value)) if value is not None else None
@@ -21,8 +21,19 @@ class ObjectId(str):
     def __get_validators__(cls):
         yield cls.validate
 
+    @classmethod
+    def __get_pydantic_json_schema__(cls, field_schema):
+        field_schema.update(type="string")
+
 
 class Model(BaseModel):
+    class Config:
+        populate_by_name = True  # Pydantic should use the alias when populating the model from a dictionary (which allows you to pass in a dictionary with an _id key rather than an id key)
+        json_encoders = {
+            BaseObjectId: str,
+            ObjectId: str,
+        }  # ObjectId should be encoded to a string when converting the model to JSON
+
     pass
 
 

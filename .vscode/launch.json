@@ -23,9 +23,10 @@
         },
         {
             "name": "Python: Consumer",
+            "cwd": "${workspaceFolder}/demo_app",
             "type": "python",
             "request": "launch",
-            "module": "watchfiles",
+            "module": "watchgod",
             "args": [
                 "demo_app.consumer.main.run",
             ],

@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "saria"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Tyler Steele <tsteele627@gmail.com>"]
 readme = "README.md"
-packages = [{include = "saria"},{include = "demo_app"}]
+
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -15,11 +15,12 @@ uvicorn = "^0.27.0"
 gunicorn = "^21.2.0"
 pyee = "^11.1.0"
 boto3 = "^1.34.29"
-bson = "^0.5.10"
+watchgod = "^0.8.2"
+pymongo = {version="4.5.0",extras = ["srv"]}
 
 
 [tool.poetry.group.dev.dependencies]
-watchfiles = "^0.21.0"
+pytest = "^8.0.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -27,5 +28,5 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.poetry.scripts]
-demo-server = "demo_app.server.main:app --reload"
-consumer = "watchfiles demo_app.consumer.main:run"
+demo-server = "demo_app.server.main:app --reload --reload-dir=./saria --reload-dir=./demo_app"
+consumer = "watchgod demo_app.consumer.main:run"

@@ -33,7 +33,7 @@ class Message(Resource, Generic[T]):
         description="The status of the message.",
         default=MessageStatus.CREATED,
     )
-    type: MessageType = Field(description="The message type.")
+    type: MessageType | str = Field(description="The message type.")
     payload: Optional[T] = Field(
         None, description="The value encapsulated in the message."
     )

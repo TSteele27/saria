@@ -1,26 +1,12 @@
-from enum import StrEnum
-from typing import Optional
+from typing import TypeVar, Generic
 from saria.app import Module
+from saria.messaging.models import Message
 from .message_handlers import MessageHandlers
 
-
-class Payload:
-    pass
+T = TypeVar("T")
 
 
-class MessageType(StrEnum):
-    pass
-
-
-class Message:
-    type: MessageType
-    payload: Payload
-    payload_id: Optional[str]
-    message_id: str
-    pass
-
-
-class MessageHandler(Module):
+class MessageHandler(Module, Generic[T]):
     def __init__(self, handlers: MessageHandlers):
         handlers.register(self)
 

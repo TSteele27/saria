@@ -127,3 +127,24 @@ def test_it_passes_along_non_modules_as_is():
         foo=test_foo,
     ).bootstrap()
     assert app.manifest.bar.foo is test_foo
+
+
+def test_it_prefers_dependecy_types_in_the_child_class():
+    class Foo(Module):
+        pass
+
+    class Bar(Foo):
+        pass
+
+    class Baz(Module):
+        def __init__(self, foo: Foo):
+            self.foo = foo
+
+    class Buz(Baz):
+        def __init__(self, foo: Bar):
+            super().__init__(foo=foo)
+
+    app = Bundle(
+        buz=Buz,
+    ).bootstrap()
+    assert type(app.manifest.buz.foo) is Bar
