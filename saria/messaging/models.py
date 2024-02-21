@@ -35,11 +35,18 @@ class Message(Resource, Generic[T]):
     )
     type: MessageType | str = Field(description="The message type.")
     payload: Optional[T] = Field(
-        None, description="The value encapsulated in the message."
+        None,
+        description="The value encapsulated in the message.",
     )
     payload_id: Optional[str] = Field(
-        None, description="The ID of the payload stored in the DB."
+        None,
+        description="The ID of the payload stored in the DB.",
     )
-    message_id: Optional[str] = Field(
-        None, description="The internal message id for this message."
+    status_reason: Optional[str] = Field(
+        None,
+        description="The reason for the failed status if the event fails.",
+    )
+    attempts: int = Field(
+        0,
+        description="The number of times this message has been processed.",
     )

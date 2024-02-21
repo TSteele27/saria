@@ -7,6 +7,8 @@ T = TypeVar("T")
 
 
 class MessageHandler(Module, Generic[T]):
+    name: str
+
     def __init__(self, handlers: MessageHandlers):
         handlers.register(self)
 

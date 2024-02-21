@@ -52,6 +52,7 @@ def _instantiate(
     for [dependency_name, dependency] in dependencies.items():
         if manifest[dependency_name]:
             params[dependency_name] = manifest[dependency_name]
+            # TODO if not found, and we have a prototype look for by prototpe name, then inject
         elif dependency.prototype and manifest[dependency.prototype]:
             params[dependency_name] = manifest[dependency.prototype]
         else:
@@ -80,6 +81,8 @@ def _instantiate(
                     params[dependency_name] = manifest[dependency_name]
             elif bundle[dependency_name] is None and dependency.prototype is not None:
                 if issubclass(dependency.prototype, Module):
+                    # TODO when injecting via dependency inference, use the
+                    # modules's dependency name
                     manifest[dependency_name] = _inject(
                         dependency.prototype,
                         dependency_name,
